@@ -72,6 +72,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (invoicePdf) {
             reader.readAsDataURL(invoicePdf);
+        } else {
+            invoices.push({
+                invoiceDate,
+                dueDate,
+                amount,
+                invoiceNumber,
+                encodingNumber,
+                supplierName,
+                seenBy,
+                paymentMethod,
+                paidDate,
+                pdfData: '' // Sans PDF
+            });
+            renderInvoices();
+            invoiceForm.reset();
         }
     });
 
