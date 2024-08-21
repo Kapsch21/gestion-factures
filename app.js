@@ -8,14 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Simuler les utilisateurs pour le développement
     const simulatedUsers = [
-        {
-            "username": "admin",
-            "password": "admin123"
-        },
-        {
-            "username": "user",
-            "password": "user123"
-        }
+        { username: "admin", password: "admin123" },
+        { username: "user", password: "user123" }
     ];
 
     // Connexion des utilisateurs
