@@ -6,6 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const invoiceTableBody = document.getElementById('invoice-table-body');
     const invoices = [];
 
+    // Simuler les utilisateurs pour le développement
+    const simulatedUsers = [
+        {
+            "username": "admin",
+            "password": "admin123"
+        },
+        {
+            "username": "user",
+            "password": "user123"
+        }
+    ];
+
     // Connexion des utilisateurs
     loginForm.addEventListener('submit', function(event) {
         event.preventDefault();
@@ -13,31 +25,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
 
-        fetch('users.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok.');
-                }
-                return response.json();
-            })
-            .then(users => {
-                const user = users.find(user => user.username === username && user.password === password);
-                
-                if (user) {
-                    loginMessage.textContent = 'Connexion réussie !';
-                    loginMessage.style.color = 'green';
-                    loginForm.style.display = 'none';
-                    contentDiv.style.display = 'block';
-                } else {
-                    loginMessage.textContent = 'Nom d\'utilisateur ou mot de passe incorrect.';
-                    loginMessage.style.color = 'red';
-                }
-            })
-            .catch(error => {
-                console.error('Erreur lors de la récupération des utilisateurs :', error);
-                loginMessage.textContent = 'Erreur de connexion. Veuillez réessayer plus tard.';
-                loginMessage.style.color = 'red';
-            });
+        const user = simulatedUsers.find(user => user.username === username && user.password === password);
+        
+        if (user) {
+            loginMessage.textContent = 'Connexion réussie !';
+            loginMessage.style.color = 'green';
+            loginForm.style.display = 'none';
+            contentDiv.style.display = 'block';
+        } else {
+            loginMessage.textContent = 'Nom d\'utilisateur ou mot de passe incorrect.';
+            loginMessage.style.color = 'red';
+        }
     });
 
     // Ajout de facture
