@@ -1,3 +1,5 @@
+// app.js
+
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
     const loginMessage = document.getElementById('login-message');
@@ -6,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const invoiceTableBody = document.getElementById('invoice-table-body');
     const invoices = [];
 
-    // Simuler les utilisateurs pour le développement
+    // Utilisateurs simulés pour le développement
     const simulatedUsers = [
         { username: "admin", password: "admin123" },
         { username: "user", password: "user123" }
