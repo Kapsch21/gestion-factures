@@ -22,7 +22,6 @@
     <div id="content" style="display:none;">
         <!-- Contenu de l'application -->
         <h1>Gestion des Factures</h1>
-        <!-- Formulaire et tableau des factures -->
         <form id="invoice-form">
             <!-- Champs du formulaire de facture -->
             <label for="invoice-date">Date de facture :</label>
@@ -85,84 +84,6 @@
             </tbody>
         </table>
     </div>
-    <script src="app.js"></script>
-</body>
-</html>
-
-    <!-- Contenu Protégé -->
-    <div id="content" style="display:none;">
-        <h2>Gestion des Factures</h2>
-        <form id="invoice-form">
-            <label for="invoice-date">Date de Facture :</label>
-            <input type="date" id="invoice-date" name="invoice-date" required>
-            <br>
-            <label for="due-date">Date d'Échéance :</label>
-            <input type="date" id="due-date" name="due-date" required>
-            <br>
-            <label for="amount">Montant :</label>
-            <input type="number" id="amount" name="amount" step="0.01" required>
-            <br>
-            <label for="invoice-number">Numéro de Facture :</label>
-            <input type="text" id="invoice-number" name="invoice-number" required>
-            <br>
-            <label for="encoding-number">Numéro d'Encodage :</label>
-            <input type="text" id="encoding-number" name="encoding-number" required>
-            <br>
-            <label for="supplier-name">Nom du Fournisseur :</label>
-            <input type="text" id="supplier-name" name="supplier-name" required>
-            <br>
-            <label for="seen-by">Vu par :</label>
-            <select id="seen-by" name="seen-by">
-                <option value="jude">Jude</option>
-                <option value="sephora">Séphora</option>
-            </select>
-            <br>
-            <label for="payment-method">Méthode de Paiement :</label>
-            <select id="payment-method" name="payment-method">
-                <option value="ING">ING</option>
-                <option value="CBC">CBC</option>
-                <option value="Fortis">Fortis</option>
-                <option value="Caisse de direction">Caisse de direction</option>
-                <option value="Domiciliation">Domiciliation</option>
-                <option value="Indépendants">Indépendants</option>
-                <option value="VISA">VISA</option>
-                <option value="Bancontact">Bancontact</option>
-                <option value="Note de frais">Note de frais</option>
-            </select>
-            <br>
-            <label for="paid-date">Payé le :</label>
-            <input type="date" id="paid-date" name="paid-date">
-            <br>
-            <label for="invoice-pdf">Importer le PDF de la Facture :</label>
-            <input type="file" id="invoice-pdf" name="invoice-pdf" accept="application/pdf">
-            <br>
-            <button type="submit" id="submit-btn">Ajouter Facture</button>
-        </form>
-
-        <h3>Liste des Factures</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th><button id="sort-by-due-date">Trier par Date d’Échéance &#9660;</button></th>
-                    <th><button id="sort-by-encoding-number">Trier par Numéro d’Encodage &#9660;</button></th>
-                    <th>Date de Facture</th>
-                    <th>Date d'Échéance</th>
-                    <th>Montant</th>
-                    <th>Numéro de Facture</th>
-                    <th>Numéro d'Encodage</th>
-                    <th>Nom du Fournisseur</th>
-                    <th>Vu par</th>
-                    <th>Méthode de Paiement</th>
-                    <th>Payé le</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="invoice-table-body">
-                <!-- Les lignes des factures seront insérées ici -->
-            </tbody>
-        </table>
-    </div>
-
     <script src="app.js"></script>
 </body>
 </html>
