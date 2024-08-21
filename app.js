@@ -1,0 +1,166 @@
+// app.js
+
+document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('login-form');
+    const loginMessage = document.getElementById('login-message');
+    const contentDiv = document.getElementById('content');
+    const invoiceForm = document.getElementById('invoice-form');
+    const invoiceTableBody = document.getElementById('invoice-table-body');
+    const invoices = [];
+    let editingIndex = null;
+
+    // Utilisateurs simulés pour le développement
+    const simulatedUsers = [
+        { username: "admin", password: "admin123" },
+        { username: "user", password: "user123" }
+    ];
+
+    // Connexion des utilisateurs
+    loginForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        const user = simulatedUsers.find(user => user.username === username && user.password === password);
+        
+        if (user) {
+            loginMessage.textContent = 'Connexion réussie !';
+            loginMessage.style.color = 'green';
+            loginForm.style.display = 'none';
+            contentDiv.style.display = 'block';
+        } else {
+            loginMessage.textContent = 'Nom d\'utilisateur ou mot de passe incorrect.';
+            loginMessage.style.color = 'red';
+        }
+    });
+
+    // Ajout ou modification de facture
+    invoiceForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const invoiceDate = document.getElementById('invoice-date').value;
+        const dueDate = document.getElementById('due-date').value;
+        const amount = document.getElementById('amount').value;
+        const invoiceNumber = document.getElementById('invoice-number').value;
+        const encodingNumber = document.getElementById('encoding-number').value;
+        const supplierName = document.getElementById('supplier-name').value;
+        const seenBy = document.getElementById('seen-by').value;
+        const paymentMethod = document.getElementById('payment-method').value;
+        const paidDate = document.getElementById('paid-date').value;
+        const invoicePdf = document.getElementById('invoice-pdf').files[0];
+
+        const reader = new FileReader();
+        reader.onloadend = function() {
+            const pdfData = reader.result;
+
+            const newInvoice = {
+                invoiceDate,
+                dueDate,
+                amount,
+                invoiceNumber,
+                encodingNumber,
+                supplierName,
+                seenBy,
+                paymentMethod,
+                paidDate,
+                pdfData
+            };
+
+            if (editingIndex !== null) {
+                invoices[editingIndex] = newInvoice;
+                editingIndex = null;
+            } else {
+                invoices.push(newInvoice);
+            }
+
+            renderInvoices();
+            invoiceForm.reset();
+        };
+
+        if (invoicePdf) {
+            reader.readAsDataURL(invoicePdf);
+        } else {
+            const newInvoice = {
+                invoiceDate,
+                dueDate,
+                amount,
+                invoiceNumber,
+                encodingNumber,
+                supplierName,
+                seenBy,
+                paymentMethod,
+                paidDate,
+                pdfData: '' // Sans PDF
+            };
+            
+            if (editingIndex !== null) {
+                invoices[editingIndex] = newInvoice;
+                editingIndex = null;
+            } else {
+                invoices.push(newInvoice);
+            }
+            renderInvoices();
+            invoiceForm.reset();
+        }
+    });
+
+    // Afficher les factures
+    function renderInvoices() {
+        invoiceTableBody.innerHTML = '';
+        invoices.forEach((invoice, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${invoice.invoiceDate}</td>
+                <td>${invoice.dueDate}</td>
+                <td>${invoice.amount}</td>
+                <td>${invoice.invoiceNumber}</td>
+                <td>${invoice.encodingNumber}</td>
+                <td>${invoice.supplierName}</td>
+                <td>${invoice.seenBy}</td>
+                <td>${invoice.paymentMethod}</td>
+                <td>${invoice.paidDate}</td>
+                <td><a href="${invoice.pdfData}" target="_blank">Voir le PDF</a></td>
+                <td>
+                    <button onclick="editInvoice(${index})">Modifier</button>
+                    <button onclick="deleteInvoice(${index})">Supprimer</button>
+                </td>
+            `;
+            invoiceTableBody.appendChild(row);
+        });
+    }
+
+    // Supprimer une facture
+    window.deleteInvoice = function(index) {
+        invoices.splice(index, 1);
+        renderInvoices();
+    };
+
+    // Modifier une facture
+    window.editInvoice = function(index) {
+        const invoice = invoices[index];
+        document.getElementById('invoice-date').value = invoice.invoiceDate;
+        document.getElementById('due-date').value = invoice.dueDate;
+        document.getElementById('amount').value = invoice.amount;
+        document.getElementById('invoice-number').value = invoice.invoiceNumber;
+        document.getElementById('encoding-number').value = invoice.encodingNumber;
+        document.getElementById('supplier-name').value = invoice.supplierName;
+        document.getElementById('seen-by').value = invoice.seenBy;
+        document.getElementById('payment-method').value = invoice.paymentMethod;
+        document.getElementById('paid-date').value = invoice.paidDate;
+
+        editingIndex = index;
+    };
+
+    // Trier les factures par date d'échéance
+    document.getElementById('sort-by-due-date').addEventListener('click', () => {
+        invoices.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+        renderInvoices();
+    });
+
+    // Trier les factures par numéro d'encodage
+    document.getElementById('sort-by-encoding-number').addEventListener('click', () => {
+        invoices.sort((a, b) => a.encodingNumber.localeCompare(b.encodingNumber));
+        renderInvoices();
+    });
+});
