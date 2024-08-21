@@ -1,136 +1,48 @@
 /* styles.css */
 
-/* Style général du corps */
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+    margin: 20px;
 }
 
-/* Conteneur pour la connexion */
-#login-container {
-    width: 100%;
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+form {
+    margin-bottom: 20px;
 }
 
-/* Style du formulaire de connexion */
-#login-form {
-    display: flex;
-    flex-direction: column;
-}
-
-#login-form label {
-    margin-bottom: 5px;
-}
-
-#login-form input {
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-#login-form button {
-    padding: 10px;
-    background: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-#login-form button:hover {
-    background: #0056b3;
-}
-
-#login-message {
+label {
+    display: block;
     margin-top: 10px;
 }
 
-/* Conteneur principal du contenu */
-#content {
-    width: 100%;
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+input, select, button {
+    margin-top: 5px;
 }
 
-/* Style du formulaire de factures */
-#invoice-form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-#invoice-form label {
-    margin-bottom: 5px;
-    display: block;
-}
-
-#invoice-form input, #invoice-form select {
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    flex: 1 1 200px; /* Ajuster la largeur pour une disposition en grille */
-}
-
-#invoice-form button {
-    padding: 10px;
-    background: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    flex: 1 1 100%; /* Prend toute la largeur disponible */
-}
-
-#invoice-form button:hover {
-    background: #218838;
-}
-
-/* Style du tableau des factures */
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-table th, table td {
-    padding: 10px;
+table, th, td {
     border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 8px;
     text-align: left;
 }
 
-table th {
-    background: #f4f4f4;
-}
-
-table td a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-table td a:hover {
-    text-decoration: underline;
+th {
+    background-color: #f4f4f4;
 }
 
 button {
+    margin-top: 10px;
     padding: 5px 10px;
-    border: none;
-    border-radius: 4px;
     cursor: pointer;
 }
 
-button:hover {
-    opacity: 0.8;
+#login-container, #content {
+    margin-top: 20px;
 }
